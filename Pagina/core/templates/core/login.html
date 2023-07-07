@@ -1,0 +1,19 @@
+{% extends 'core/plantilla.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<section class="principal">
+  <div class="borde">
+  <form method="post" class="formulario">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="b-sec">Iniciar sesion</button>
+    <p class="aviso">¿No te has registrado aún? <br> <a href="{% url 'registro' %}">Registrate aquí!</a></p>
+  </form>
+  </div>
+</section>
+
+<!-- <br><br><br><br><br><br><br><br> -->
+{% endblock %}

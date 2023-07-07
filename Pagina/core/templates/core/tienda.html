@@ -1,0 +1,293 @@
+{% extends 'core/plantilla.html' %}
+{% load static %}
+{% block content %}
+<a href="#top" class="boton"><img src="{% static 'image/iconos/Up Squared_50px.png' %}" alt=""></a>
+<section class="wrapper">
+  <div class="categorias">
+    <h1>Categorias</h1>
+    <div class="d-flex">
+
+
+      <div class="card">
+        <a href="#sec-gatos">
+          <img
+            src="{% static 'image/gatos/01-cat-groom-nationalgeographic-1031934.jpg' %}"
+            alt="pancake" class="card__img">
+          <p class="card__txt">Felinos</p>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#sec-perros">
+          <img
+            src="{% static 'image/perros/61a8dcedeeef9492014527.avif' %}"
+            alt="donuts" class="card__img">
+          <p class="card__txt">Caninos</p>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#sec-ratones">
+          <img
+            src="{% static 'image/roedores/chinchilla_exotics_0.jpg' %}"
+            alt="pizza" class="card__img">
+          <p class="card__txt">Roedores</p>
+        </a>
+      </div>
+      <div class="card">
+        <a href="#sec-aves">
+          <img
+            src="{% static 'image/aves/descarga.jpg' %}"
+            alt="pancakes" class="card__img">
+          <p class="card__txt">Aves</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="secciones">
+    <h2>
+      <strong>Ofertas <img src="{% static 'image/iconos/discount_50px.png' %}" alt=""></strong>
+    </h2>
+  </div>
+  <!-- ARTICULOS -->
+
+  <section class="articulos">
+    {% for producto in productos_con_oferta %}
+    <div class="articulo">
+      <a href="{% url 'descripcion' producto.codigo %}" class="link-art"></a>
+      <img src="{{producto.imagen}}" class="arti-imag" alt="">
+      <div class="info">
+        <div class="nombre">
+          <h4>{{producto.nombre}}</h4>
+          <div>
+            <div class="precio">
+              <p>Precio normal</p>
+              <h2 class="oferta">
+                <strong>${{ producto.precio }} CLP</strong>
+              </h2>
+              <p>Precio oferta</p>
+              <h2>
+                <strong>{{producto.descuento}}% ${{ producto.nuevoPrecio }} CLP</strong>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="puntaje">
+          <p><Strong>{{ producto.puntaje }}</Strong></p>
+          <img src="{% static 'image/img/star_50px.png' %}" alt="">
+        </div>
+        <p class="unidades">Stock: {{ producto.stock }} Unidad(es)</p>
+      </div>
+
+      <a href="{% url 'descripcion' producto.codigo %}" class="detalle-btn">Ver detalles</a>
+    </div>
+    {% endfor %}
+  </section>
+
+
+  <!-- gato -->
+  <div class="secciones"  id="sec-gatos">
+    <h2 id="GATOS">
+      <strong>Felinos <img src="{% static 'image/iconos/pet_commands_follow_50px.png' %}" alt=""></strong>
+    </h2>
+  </div>
+  <section class="articulos">
+    {% for producto in productos %}
+    {% if producto.categoria == 'gatos' %}
+    <div class="articulo">
+      <a href="{% url 'descripcion' producto.codigo %}" class="link-art"></a>
+      <img src="{{producto.imagen}}" class="arti-imag" alt="">
+      <div class="info">
+        <div class="nombre">
+          <h4>
+            {{ producto.nombre }}</h4>
+          {% if producto.oferta %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <h2 class="oferta">
+              <strong>${{ producto.precio }} CLP</strong>
+            </h2>
+            <p>Precio oferta</p>
+            <h2>
+              <strong>{{producto.descuento}}% ${{ producto.nuevoPrecio }} CLP</strong>
+            </h2>
+          </div>
+          {% else %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <strong>${{ producto.precio }} CLP</strong>
+          </div>
+          {% endif %}
+
+        </div>
+        <div class="puntaje">
+          <p><Strong>{{ producto.puntaje }}</Strong></p>
+          <img src="{% static 'image/img/star_50px.png' %}" alt="">
+        </div>
+        <p class="unidades">Stock: {{ producto.stock }} Unidad(es)</p>
+      </div>
+      <a href="{% url 'descripcion' producto.codigo %}" class="detalle-btn">Ver detalles</a>
+
+    </div>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+
+
+  <!-- perro -->
+  <div class="secciones"  id="sec-perros">
+    <h2 id="PERROS">
+      <strong>Caninos <img src="{% static 'image/iconos/dog_50px.png' %}" alt=""></strong>
+    </h2>
+  </div>
+  <section class="articulos">
+    {% for producto in productos %}
+    {% if producto.categoria == 'perros' %}
+    <div class="articulo">
+      <a href="{% url 'descripcion' producto.codigo %}" class="link-art"></a>
+      <img src="{{producto.imagen}}" class="arti-imag" alt="">
+      <div class="info">
+        <div class="nombre">
+          <h4>
+            {{ producto.nombre }}</h4>
+          {% if producto.oferta %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <h2 class="oferta">
+              <strong>${{ producto.precio }} CLP</strong>
+            </h2>
+            <p>Precio oferta</p>
+            <h2>
+              <strong>{{producto.descuento}}% ${{ producto.nuevoPrecio }} CLP</strong>
+            </h2>
+          </div>
+          {% else %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <strong>${{ producto.precio }} CLP</strong>
+          </div>
+          {% endif %}
+
+        </div>
+        <div class="puntaje">
+          <p><Strong>{{ producto.puntaje }}</Strong></p>
+          <img src="{% static 'image/img/star_50px.png' %}" alt="">
+        </div>
+        <p class="unidades">Stock: {{ producto.stock }} Unidad(es)</p>
+      </div>
+      <br>
+      <a href="{% url 'descripcion' producto.codigo %}" class="detalle-btn">Ver detalles</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+
+
+  <!-- ratoness -->
+  <div class="secciones"  id="sec-ratones">
+    <h2 id="RATAS">
+      <strong>Roedores <img src="{% static 'image/iconos/mouse_animal_50px.png' %}" alt=""></strong>
+    </h2>
+  </div>
+  <section class="articulos">
+    {% for producto in productos %}
+    {% if producto.categoria == 'roedores' %}
+    <div class="articulo">
+      <a href="{% url 'descripcion' producto.codigo %}" class="link-art"></a>
+      <img src="{{producto.imagen}}" class="arti-imag" alt="">
+      <div class="info">
+        <div class="nombre">
+          <h4>
+            {{ producto.nombre }}</h4>
+          {% if producto.oferta %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <h2 class="oferta">
+              <strong>${{ producto.precio }} CLP</strong>
+            </h2>
+            <p>Precio oferta</p>
+            <h2>
+              <strong>{{producto.descuento}}% ${{ producto.nuevoPrecio }} CLP</strong>
+            </h2>
+          </div>
+          {% else %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <strong>${{ producto.precio }} CLP</strong>
+          </div>
+          {% endif %}
+
+        </div>
+        <div class="puntaje">
+          <p><Strong>{{ producto.puntaje }}</Strong></p>
+          <img src="{% static 'image/img/star_50px.png' %}" alt="">
+        </div>
+        <p class="unidades">Stock: {{ producto.stock }} Unidad(es)</p>
+      </div>
+      <br>
+      <a href="{% url 'descripcion' producto.codigo %}" class="detalle-btn">Ver detalles</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+
+  <!-- aves -->
+  <div class="secciones"  id="sec-aves">
+    <h2 id="AVES">
+      <strong>Aves <img src="{% static 'image/iconos/bird_50px.png' %}" alt=""></strong>
+    </h2>
+  </div>
+  <section class="articulos">
+    {% for producto in productos %}
+    {% if producto.categoria == 'aves' %}
+    <div class="articulo">
+      <a href="{% url 'descripcion' producto.codigo %}" class="link-art"></a>
+      <img src="{{producto.imagen}}" class="arti-imag" alt="">
+      <div class="info">
+        <div class="nombre">
+          <h4>
+            {{ producto.nombre }}</h4>
+          {% if producto.oferta %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <h2 class="oferta">
+              <strong>${{ producto.precio }} CLP</strong>
+            </h2>
+            <p>Precio oferta</p>
+            <h2>
+              <strong>{{producto.descuento}}% ${{ producto.nuevoPrecio }} CLP</strong>
+            </h2>
+          </div>
+          {% else %}
+          <div class="precio">
+            <p>Precio normal</p>
+            <strong>${{ producto.precio }} CLP</strong>
+          </div>
+          {% endif %}
+
+        </div>
+        <div class="puntaje">
+          <p><Strong>{{ producto.puntaje }}</Strong></p>
+          <img src="{% static 'image/img/star_50px.png' %}" alt="">
+        </div>
+        <p class="unidades">Stock: {{ producto.stock }} Unidad(es)</p>
+      </div>
+      <br>
+      <a href="{% url 'descripcion' producto.codigo %}" class="detalle-btn">Ver detalles</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+
+</main>
+</div>
+<br><br><br><br><br><br>
+{% endblock %}
+</body>
+
+</html>

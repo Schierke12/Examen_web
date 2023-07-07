@@ -1,0 +1,96 @@
+{% extends 'core/plantilla.html' %}
+{% load static %}
+{% block content %}
+
+<!-- PERFIL -->
+<section class="perfil-usuario">
+  <div class="contenedor-perfil">
+    <div class="portada-perfil" style="background-image: url('img/The-Art-of-Takehiko-Inoues-Vagabond.webp');">
+      <div class="sombra"></div>
+      <div class="avatar-perfil">
+        <img src="{% static 'image/img/mclovin.jpg' %}" alt="img">
+        <a href="#" class="cambiar-foto">
+          <p>cambiar foto</p>
+          <i class="fas fa-camera"></i>
+        </a>
+      </div>
+      <div class="datos-perfil">
+        <h4 class="titulo-usuario">{{ user.username }}</h4>
+        {% if not suscrito %}
+        <ul class="lista-perfil">
+          <li>Estado de suscripcion:<p id="suscripcion">No subscrito</p>
+            <br>
+          </li>
+          <li>Suscribete para disfrutar de los increibles descuentos</li>
+        </ul>
+        {% else %}
+        <ul class="lista-perfil">
+          <li>Estado de suscripcion:<p id="suscripcion">Subscrito</p>
+            <br>
+          </li>
+          <li>Disfruta de los beneficios de ser parte de la familia</li>
+        </ul>
+        {% endif %}
+      </div>
+      <div class="opcciones-perfil">
+        <button type="">Fondo</button>
+        <!-- <button type=""><i class="fas fa-wrench"> <img src="img/se" alt=""></i></button> (comentao para cambios a futuro)-->
+      </div>
+    </div>
+    <div class="menu-perfil">
+      <ul>
+        {% if not suscrito%}
+        <li>
+          <form action="{% url 'suscribir' %}" method="post">
+            {% csrf_token %}
+            <button id="button1" class="botonsitos">Suscribirse</button>
+          </form>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</section>
+<div id="historial">
+  <article class="his">
+    <h1 class="hi">Historial de compras</h1>
+    <br><br><br>
+    <table id="tabla">
+      <thead id="tab-head">
+        <tr class="tab-col">
+          <th class="tab-datos">Nombre</th>
+          <th class="tab-datos">Producto</th>
+          <th class="tab-datos">Cantidad</th>
+          <th class="tab-datos">Estado</th>
+          <th class="tab-datos">Fecha</th>
+          <th class="tab-datos">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fi in detalles %}
+        <tr class="tab-col">
+          <td class="tab-datos">{{fi.nombre}}</td>
+          <td class="tab-datos"><img src="{{ fi.imagen }}" alt="" class="img2"></td>
+          <td class="tab-datos">{{fi.cantidad}}</td>
+          <td class="tab-datos">{{fi.estado}}</td>
+          <td class="tab-datos">{{fi.fecha}}</td>
+          <td class="tab-datos">{{fi.total}}
+            {% if suscrito%}
+            (5%<img src="{% static 'image/iconos/Popular Man_30px.png' %}" class="imag-sub">)
+          {% else %}
+            
+          {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if not compras %}
+    <h2 style="text-align: center; font-size: 2rem; margin: 20px;">Aún no tienes compras realizadas!.</h2>
+    {% endif %}
+    <br><br><br>
+  </article>
+</div>
+
+{% endblock %}
+</body>

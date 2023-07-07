@@ -1,0 +1,94 @@
+{% extends 'core/plantilla.html' %}
+{% load static %}
+{% block content %}
+
+
+<article class="contenido">
+  <main id="producto">
+
+    <img src="{{producto.imagen}}" class="imag-pro" alt="">
+
+
+    <aside>
+      <form action="{% url 'carroCompras' producto.codigo %}" method="get">
+        <div class="descripcion">
+          <h1 id="nom-pro">{{producto.nombre}}</h1>
+          <div id="score">
+            <p>{{producto.puntaje}}</p><img src="{% static 'image/img/star_50px.png' %}">
+          </div>
+          <div id="valores">
+            {% if producto.oferta %}
+            <div class="digito">
+              <h2>Precio Oferta</h2>
+              <p><strong> {{producto.descuento}}% ${{producto.nuevoPrecio}} CLP </strong></p>
+            </div>
+            <div class="digito">
+              <h2 class="oferta">Precio Normal</h2>
+              <p class="oferta"><strong>${{producto.precio}} CLP</strong></p>
+            </div>
+            {%else%}
+            <div class="digito">
+              <h2><strong>Precio Normal</strong></h2>
+              <p><strong>${{producto.precio}} CLP</strong></p>
+            </div>
+            <div class="digito">
+              <br>
+              <br>
+            </div>
+            {%endif%}
+            <div class="digito">
+              <h3>Stock disponible:</h3>
+              <p><strong>{{producto.stock}} Unidad(es)</strong></p>
+            </div>
+          </div>
+          <div class="cantidad">
+            <label for="contador" id="lab-txt">Cantidad:</label>
+            <div>
+
+              <button type="button" onclick="disminuir()" class="bt-cant">-</button>
+              <input type="number" id="contador" value="1" name="contador" readonly class="cont-txt">
+              <button type="button" onclick="aumentar()" class="bt-cant">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="comp-bt">
+          <!-- <a href="{% url 'carroCompras' producto.codigo %}">Agregar al carrito</a> -->
+          <button type="submit">Agregar al carro</button>
+        </div>
+    </aside>
+  </main>
+</article>
+
+<div class="secciones">
+  <h2>
+    <strong>Productos relacionados</strong>
+  </h2>
+</div>
+
+<div class="relacionados">
+  {% for producto_relacionado in productos_relacionados %}
+  <div class="desc-rela">
+    <!-- <a href="{% url 'descripcion' producto.codigo %}" class="link-rela"></a> -->
+    <img src="{{producto_relacionado.imagen}}" alt="" class="rela-img">
+    <h1 class="rela-nom">{{producto_relacionado.nombre}}</h1>
+    <br>
+    {% if producto_relacionado.oferta %}
+    <div class="precio-rela">
+      <h3>Precio Normal</h3>
+      <strong class="oferta">${{ producto_relacionado.precio }} CLP</strong>
+      <h3>Precio Oferta</h3>
+      <strong>{{producto_relacionado.descuento}}% ${{ producto_relacionado.nuevoPrecio }} CLP</strong>
+    </div>
+    {% else %}
+    <div class="precio-rela">
+      <h3>Precio Normal</h3>
+      <strong>${{ producto_relacionado.precio }} CLP</strong>
+    </div>
+    {% endif %}
+    <a class="rela-btn" href="{% url 'descripcion' producto_relacionado.codigo %}">Ver detalles</a>
+  </div>
+  {% endfor %}
+</div>
+
+
+{% endblock %}

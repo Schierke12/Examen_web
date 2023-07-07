@@ -1,0 +1,50 @@
+{% extends 'core/plantilla.html' %}
+{% load static %}
+{% block content %}
+
+
+  <div class="secciones">
+    <h2>
+      <strong>Carro de compras</strong>
+    </h2>
+  </div>
+  <section>
+    <table id="tabla">
+      <thead id="tab-head">
+        <tr class="tab-col">
+          <th class="tab-datos">Codigo</th>
+          <th class="tab-datos">Imagen</th>
+          <th class="tab-datos">Nombre</th>
+          <th class="tab-datos">Precio</th>
+          <th class="tab-datos">Cantidad</th>
+          <th class="tab-datos">Subtotal</th>
+        </tr>
+      </thead>
+      {% for i in carro %}
+        <tr class="tab-col">
+          <td class="tab-datos">{{ i.0 }}</td>
+          <td class="tab-datos"><a href="{% url 'descripcion' i.0 %}"><img src="{{ i.1 }}" alt="" class="img2"></a></td>
+          <td class="tab-datos">{{ i.2 }}</td>
+          <td class="tab-datos">{{ i.3 }}</td>
+          <td class="tab-datos">{{ i.4 }}</td>
+          <td class="tab-datos">{{ i.5 }}
+            {% if suscrito%}
+            (5%<img src="{% static 'image/iconos/Popular Man_30px.png' %}" class="imag-sub">)
+          {% else %}
+            
+          {% endif %}
+          </td>
+          <td class="tab-datos"><a href="{% url 'limpiarCarro' i.0 %}"><img src="{% static 'image/iconos/delete_50px.png' %}" alt="" class="img-delete"></a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% if not carro %}
+  <h2 style="text-align: center; margin: 100px; font-size: 3rem;"> El carro esta vacío!</h2>
+  {% else %}
+  <div class="hacer-comp">
+    <a href="{% url 'realizarCompra'%}">Comprar</a>
+  </div>
+  {% endif %}
+
+{% endblock %}

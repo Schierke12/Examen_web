@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATETES</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="shortcut icon" href="{% static 'image/iconos/cat_60px.png' %}">
+  <script src="{% static 'funciones.js' %}"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="{% url 'home' %}">GATETES</a>
+    </div>
+    <div class="marti" onmouseenter="boton()">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <nav class="nav_bar">
+      <ul>
+        <li>
+          <a style="background-color: transparent; " href="{% url 'carro' %}"><img src="{% static 'image/iconos/Shopping Cart_50px.png' %}" alt=""></a>
+        </li>
+        <li>
+          <a href="{% url 'home' %}" class="active">Tienda</a>
+        </li>
+        <li>
+          <a href="{% url 'perfil' %}">Usuario</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <p class="usuario_conectado">{{ user.username }}
+          {% if suscrito%}
+            <img src="{% static 'image/iconos/Popular Man_30px_2.png' %}" alt="">
+          {% else %}
+            
+          {% endif %}
+          </p>
+        </li>
+        <li>
+          <a href="{% url 'logout' %}">Salir</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'login' %}">login</a>
+        </li>
+        <li>
+          <a href="{% url 'registro' %}">Registro</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </header>
+  {% block content %}
+  {% endblock %}
+  <div class="footer-dark">
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-md-3 item">
+            <h3>Atencion al cliente</h3>
+            <ul>
+              <li><a href="#">Preguntas frecuentes</a></li>
+              <li><a href="#">Ventas por mayor</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-3 item">
+            <h3>Acerca de</h3>
+            <ul>
+              <li><a href="#">Compañia</a></li>
+              <li><a href="#">Equipo</a></li>
+              <li><a href="#">Historia</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 item text">
+            <h3>GATETES</h3>
+            <p>Siendo complices de ayudar a sus mascotas para darles los mejores productos de calidad y
+              muchos buenos
+              recuerdos</p>
+          </div>
+          <div class="redess">
+            <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i
+                  class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a
+                href="#"><i class="icon ion-social-instagram"></i></a></div>
+          </div>
+        </div>
+
+        <p class="copyright">Derechos reservados 2023 ©</p>
+      </div>
+    </footer>
+  </div>
